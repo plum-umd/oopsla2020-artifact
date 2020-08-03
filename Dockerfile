@@ -1,14 +1,14 @@
 FROM ubuntu:18.04
 
 RUN apt update
-RUN apt install -y git z3 curl vim libicu-dev libtinfo-dev
+RUN apt install -y git curl wget vim libicu-dev libtinfo-dev unzip
 RUN curl -sSL https://get.haskellstack.org/ | sh
-RUN echo 'export PATH="/root/.local/bin:$PATH"' >> /root/.bashrc
 
+# Install Z3.
+WORKDIR /
+RUN wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.8/z3-4.8.8-x64-ubuntu-16.04.zip
+RUN unzip z3-4.8.8-x64-ubuntu-16.04.zip
 
-# TODO
-# RUN git clone --branch oopsla2020 --recursive https://github.com/yiyunliu/liquid-benchmark.git
-# RUN git clone --recursive https://github.com/yiyunliu/liquid-benchmark.git
 
 ADD liquid-benchmark /liquid-benchmark
 
@@ -21,3 +21,7 @@ WORKDIR /liquid-benchmark/vrdt
 RUN stack build
 
 WORKDIR /liquid-benchmark
+RUN stack build
+
+# Set Path.
+RUN echo 'export PATH="/z3-4.8.8-x64-ubuntu-16.04/bin:/root/.local/bin:$PATH"' >> /root/.bashrc
