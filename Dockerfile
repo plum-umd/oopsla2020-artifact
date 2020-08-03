@@ -9,10 +9,12 @@ RUN curl -sSL https://get.haskellstack.org/ | sh
 RUN git clone --recursive https://github.com/yiyunliu/liquid-benchmark.git
 
 # Install Liquid.
-WORKDIR liquid-benchmark/liquidhaskell
+WORKDIR /liquid-benchmark/liquidhaskell
 RUN stack install
 RUN echo 'export PATH="/root/.local/bin:$PATH"' >> /root/.bashrc
 
 # Build VRDT example applications.
-WORKDIR liquid-benchmark/vrdt
+WORKDIR /liquid-benchmark/vrdt
 RUN stack build
+
+WORKDIR /liquid-benchmark
