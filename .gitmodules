@@ -1,0 +1,3 @@
+[submodule "liquid-benchmark"]
+	path = liquid-benchmark
+	url = git@github.com:yiyunliu/liquid-benchmark.git

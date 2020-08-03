@@ -6,7 +6,9 @@ RUN curl -sSL https://get.haskellstack.org/ | sh
 
 # TODO
 # RUN git clone --branch oopsla2020 --recursive https://github.com/yiyunliu/liquid-benchmark.git
-RUN git clone --recursive https://github.com/yiyunliu/liquid-benchmark.git
+# RUN git clone --recursive https://github.com/yiyunliu/liquid-benchmark.git
+
+ADD liquid-benchmark /
 
 # Install Liquid.
 WORKDIR /liquid-benchmark/liquidhaskell
