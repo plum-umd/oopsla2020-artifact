@@ -59,15 +59,14 @@ Before verifying a file, LH will automatically verify the file's dependencies if
 
 ## Where to find the proofs
 ### liquid-base
-#### Functor/Applicative/Monad
-##### Classes
+#### Classes
 [/liquid-benchmark/liquid-base/liquid-base/src/Data/Functor/Classes.hs](liquid-benchmark/liquid-base/liquid-base/src/Data/Functor/Classes.hs) contains the `Functor`, `Applicative` and `Monad` class definitions and their verified versions.
 
 [/liquid-benchmark/liquid-base/liquid-base/src/Data/Semigroup/Classes.hs](liquid-benchmark/liquid-base/liquid-base/src/Data/Semigroup/Classes.hs) contains `Semigroup` and `Monoid`.
 
 Note that lambdas are uninterpreted in refinements. In order to avoid the usage of lambda, we need to define certain functions as top-level or add additional parameters to the laws (such as `lawMonad3`).
 
-##### Instances
+#### Instances
 The instance for a data type lives in the subdirectory where the data type is defined. For example, the `Semigroup` and `Monoid` instances of `PNat` are defined in [/liquid-benchmark/liquid-base/liquid-base/src/Data/PNat/Semigroup.hs](liquid-benchmark/liquid-base/liquid-base/src/Data/PNat/Semigroup.hs).
 
 
