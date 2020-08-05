@@ -10,7 +10,7 @@ We provide a `Dockerfile` that can be used to run and benchmark the proofs, as w
 ## Build
 First, clone the repo:
 ```
-git clone --recursive git@github.com:plum-umd/oopsla2020-artifact.git
+git clone --recursive https://github.com/plum-umd/oopsla2020-artifact
 ```
 Then build the docker image with:
 ```
