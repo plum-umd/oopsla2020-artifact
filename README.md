@@ -56,6 +56,10 @@ The `-i` option is not necessary if the working directory is already `/liquid-be
 
 Before verifying a file, LH will automatically verify the file's dependencies if they have not been verified already. This is why the benchmark driver typechecks the common dependencies before checking the proofs so the time it takes to verify a dependency will not be counted toward the time of the first proof that depends on it.
 
+`liquid` does not know which GHC extensions to enable just by reading the source. You need to tell `liquid` which GHC extensions are enabled at the command line. For your convenience, here is a list of flags you should pass to LH to verify the majority of the files from the repo:
+```
+liquid --typeclass --ghc-option=-XBangPatterns --ghc-option=-XTypeFamilies --ghc-option=-XFlexibleContexts --ghc-option=-cpp -i DIR DIR/A/B/C/some-file.hs
+```
 
 ## Where to find the proofs
 ### liquid-base
