@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 RUN apt update
-RUN apt install -y git curl wget vim libicu-dev libtinfo-dev unzip
+RUN apt install -y git curl wget vim libicu-dev libtinfo-dev unzip screen
 RUN curl -sSL https://get.haskellstack.org/ | sh
 
 # Install Z3.

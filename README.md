@@ -27,13 +27,13 @@ This will take a while to finish.
 
 Note that lambdas are uninterpreted in refinements. In order to avoid the usage of lambda, we need to define certain functions as top-level or add additional parameters to the laws (such as `lawMonad3`).
 
-##### Instances
+#### Instances
 The instance for a data type lives in the subdirectory where the data type is defined. For example, the `Semigroup` and `Monoid` instances of `PNat` are defined in [/liquid-benchmark/liquid-base/liquid-base/src/Data/PNat/Semigroup.hs](https://github.com/plum-umd/liquid-base/tree/13d42192f3f1e4ec10616cb9dc978320ef02cb17/liquid-base/src/Data/PNat/Semigroup.hs).
 
 
 ### vrdt
 #### The VRDT typeclass
-The VRDT typeclass defines the properties that an instance needs to satisfy in order to prove its strong convergence. You can find this file at [/liquid-benchmark/vrdt/vrdt/src/VRDT/Class.hs](https://github.com/jprider63/vrdt/tree/aa5ff450e5f05ec3316c86dd92ea3fae822dcf07/vrdt/src/VRDT/Class.hs).
+The VRDT typeclass defines the properties that an instance needs to satisfy in order to prove its strong convergence. You can find this file at [/liquid-benchmark/vrdt/vrdt/src/VRDT/Class.hs](https://github.com/jprider63/vrdt/tree/aa5ff450e5f05ec3316c86dd92ea3fae822dcf07/vrdt/src/VRDT/Class.hs#L29).
 
 #### The VRDT instances
 ##### LWW
@@ -55,7 +55,7 @@ This is a showcase of how we automatically derive compound VRDTs from existing o
 [/liquid-benchmark/vrdt/vrdt/src/VRDT/TwoPMap.hs](https://github.com/jprider63/vrdt/tree/aa5ff450e5f05ec3316c86dd92ea3fae822dcf07/vrdt/src/VRDT/TwoPMap.hs)
 
 #### Strong Convergence Proof
-[/liquid-benchmark/vrdt/vrdt/src/VRDT/Class/Proof.hs](https://github.com/jprider63/vrdt/tree/aa5ff450e5f05ec3316c86dd92ea3fae822dcf07/vrdt/src/VRDT/Class/Proof.hs)
+[/liquid-benchmark/vrdt/vrdt/src/VRDT/Class/Proof.hs](https://github.com/jprider63/vrdt/tree/aa5ff450e5f05ec3316c86dd92ea3fae822dcf07/vrdt/src/VRDT/Class/Proof.hs#L15)
 
 This file contains the strong convergence proof mentioned in Section 4.3. It is done purely in terms of the typeclass specification so it can be instantiated to any of the `VRDT` instances.
 
@@ -72,6 +72,7 @@ docker run --rm -it liquid-typeclasses /bin/bash
 The working directory `liquid-benchmark` includes our extenstion to LiquidHaskell with typeclasses and all the programs we verify in our paper as git submodules. 
 `vrdt` contains the verified CRDTs and the proof of strong convergence. The following command uses LiquidHaskell to typecheck the `VRDT` proofs that verify quickly. It verifies `vrdt` 5 times using 12 cores and outputs the sample variance and mean for the execution time:
 ```
+cd /liquid-benchmark
 stack exec liquid-benchmark -- --vrdt --fast --times 5 --cores 12
 ```
 
@@ -104,4 +105,37 @@ Before verifying a file, LH will automatically verify the file's dependencies if
 ```
 liquid --typeclass --ghc-option=-XBangPatterns --ghc-option=-XTypeFamilies --ghc-option=-XFlexibleContexts --ghc-option=-cpp -i DIR DIR/A/B/C/some-file.hs
 ```
+
+## Running example distibuted applications
+### Event application
+Inside the docker image, start a screen session:
+```
+cd /liquid-benchmark/vrdt
+screen -Rd examples
+```
+
+Start the server:
+```
+stack exec -- kyowon-server 3000 &
+```
+
+Create a new screen window with `ctrl-a c`. Then start the event client application with:
+```
+stack exec -- event alice 2>/dev/null
+```
+
+You can repeat the previous step repeatedly to create multiple clients and switch between screen windows with `ctrl-a n`. 
+In the event application, you can create, edit, and RSVP to events and the rest of the clients will automatically update with your changes (dates are parsed as `2020-10-10 10:00am`).
+Buttons may not render properly depending on your terminal.
+The bottom button on the create event page creates an event.
+
+### Collaborative text editor
+
+You can run the collaborative text editor with the same instructions as the event application, except use the following command to start clients. Be sure to restart the `kyowon-server`.
+```
+stack exec -- collaborate 2>/dev/null
+```
+
+Move around with the arrow keys and type letters normally. 
+
 
