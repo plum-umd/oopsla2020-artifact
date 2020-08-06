@@ -70,10 +70,10 @@ docker run --rm -it liquid-typeclasses /bin/bash
 ### Verify proofs
 
 The working directory `liquid-benchmark` includes our extenstion to LiquidHaskell with typeclasses and all the programs we verify in our paper as git submodules. 
-`vrdt` contains the verified CRDTs and the proof of strong convergence. The following command uses LiquidHaskell to typecheck the `VRDT` proofs that verify quickly. It verifies `vrdt` 5 times using 12 cores and outputs the sample variance and mean for the execution time:
+`vrdt` contains the verified CRDTs and the proof of strong convergence. The following command uses LiquidHaskell to typecheck the `VRDT` proofs that verify quickly. It verifies `vrdt` 2 times using 12 cores and outputs the sample variance and mean for the execution time:
 ```
 cd /liquid-benchmark
-stack exec liquid-benchmark -- --vrdt --fast --times 5 --cores 12
+stack exec liquid-benchmark -- --vrdt --fast --times 2 --cores 12
 ```
 
 The `--fast` command skips the proofs for `TwoPMap` and `CausalTree` since these take hours to verify. You can verify all the `VRDT` instances with the following command, but it requires more hardware resources (we know that 16GiB of physical memory + 24GiB of swap space is sufficient):
