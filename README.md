@@ -108,10 +108,9 @@ liquid --typeclass --ghc-option=-XBangPatterns --ghc-option=-XTypeFamilies --ghc
 
 ## Running example distibuted applications
 ### Event application
-Inside the docker image, start a screen session:
+Switch to the vrdt directory:
 ```
 cd /liquid-benchmark/vrdt
-screen -Rd examples
 ```
 
 Start the server:
@@ -119,14 +118,22 @@ Start the server:
 stack exec -- kyowon-server 3000 &
 ```
 
-Create a new screen window with `ctrl-a c`. Then start the event client application with:
+Create a new tmux session:
+```
+tmux
+```
+
+Then start the event client application with:
 ```
 stack exec -- event alice 2>/dev/null
 ```
 
-You can repeat the previous step repeatedly to create multiple clients and switch between screen windows with `ctrl-a n`. 
+Create a new tmux window with `ctrl-b c`. Use the same command from the previous step to start another client.
+
+
+You can repeat the previous step repeatedly to create multiple clients and switch between tmux windows with `ctrl-b n` where n is the number associated with each window.
 In the event application, you can create, edit, and RSVP to events and the rest of the clients will automatically update with your changes (dates are parsed as `2020-10-10 10:00am`).
-Buttons may not render properly depending on your terminal.
+Buttons may not render properly depending on your terminal. However, you should still be able to click on the text with your mouse.
 The bottom button on the create event page creates an event.
 
 ### Collaborative text editor
