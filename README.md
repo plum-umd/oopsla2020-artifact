@@ -113,22 +113,23 @@ Switch to the vrdt directory:
 cd /liquid-benchmark/vrdt
 ```
 
-Start the server:
-```
-stack exec -- kyowon-server 3000 &
-```
 
 Create a new tmux session:
 ```
 tmux
 ```
 
-Then start the event client application with:
+Start the server:
+```
+stack exec -- kyowon-server 3000 &
+```
+
+
+Create a new tmux window with `ctrl-b c`.  Then start the event client application with:
 ```
 stack exec -- event alice 2>/dev/null
 ```
 
-Create a new tmux window with `ctrl-b c`. Use the same command from the previous step to start another client.
 
 
 You can repeat the previous step repeatedly to create multiple clients and switch between tmux windows with `ctrl-b n` where n is the number associated with each window.
